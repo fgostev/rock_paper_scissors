@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Papper Scissors</title>
+</head>
+<link rel="stylesheet" href="stylesheet.css">
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,700&display=swap" rel="stylesheet">
+<body>
+<div class = "container">
+    <div id = "playerScore">
+        <h1>SCORE</h1>
+        <p id="your" class="block">Your:</p>
+        <p id="computer" class="block">Computer:</p>
+        <p id ="winner"></p>
+    </div>
+    <div id = results>
+        <p id = "result-text"></p>
+    </div>
+    <div id = "buttons">
+    <button id="rock">rock</button>
+    <button id="paper">paper</button>
+    <button id="scissors">scissors</button>
+    </div>
+    </div>
+    
+</body>
+
+<script>
+
+    let computerScore = 0;
+    let userScore = 0; 
+
+
+            
+
+    const RPS = ["rock", "paper", "scissors"];
+
+    function computerPlay(){
+        return RPS[Math.floor(Math.random()* RPS.length)];
+    }
+
+    let computerSelection = computerPlay();
+    let userSelection;
+
+    const rock = document.getElementById("rock");
+    rock.addEventListener("click", help1);
+
+
+    const paper = document.getElementById("paper");
+    paper.addEventListener("click", help2);
+
+    const scissors = document.getElementById("scissors");
+    scissors.addEventListener("click", help3);
+
+    function help1() {
+            return playRound("rock", computerPlay());
+          }
+    function help2() {
+            return playRound("paper", computerPlay());
+          }
+    function help3() {
+            return playRound("scissors", computerPlay());
+          }
+
+              // results 
+          const resultText = document.querySelector('#result-text');
+          const computerScoreText = document.querySelector('#computer');
+          const userScoreText = document.querySelector('#your');
+          const winnerText = document.querySelector('#winner');
+
+
+
+    function playRound(userSelection, computerSelection){
+
+        if(userSelection == "rock" && computerSelection == "paper"){
+        computerScore++; 
+        resultText.textContent = "You Lose! Paper beats Rock";
+        computerScoreText.textContent = "Computer: " + computerScore;
+        }
+        else if(userSelection == "paper" && computerSelection == "scissors") {
+            computerScore++;
+            resultText.textContent = "You Lose! Scissors beats Paper!";
+            computerScoreText.textContent = "Computer: " + computerScore;
+        }
+        else if(userSelection == "scissors" && computerSelection == "rock") {
+            computerScore++;
+            resultText.textContent = "You Lose! Rock beats Scissors!";
+            computerScoreText.textContent = "Computer: " + computerScore;
+        }
+        else if (userSelection == computerSelection){
+            resultText.textContent = "DRAW! Another round!";
+        }
+        else  {
+            userScore++;
+            resultText.textContent = "You Win! " + userSelection + " beats " + computerSelection;
+            userScoreText.textContent = "Your: " + userScore;
+        };
+            if (userScore == 5) {
+            resultText.textContent = "You WON the game with: " + userScore + " vs " + computerScore;
+            rock.disabled = true; 
+            paper.disabled = true;
+            scissors.disabled = true;
+        };
+             if(computerScore == 5) {
+             resultText.textContent = "You LOST the game with: " + userScore + " vs " + computerScore;
+              rock.disabled = true;
+              paper.disabled = true;
+              scissors.disabled = true;
+    };
+    };
+
+
+</script>
+
+</html>
